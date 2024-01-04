@@ -1,0 +1,78 @@
+# calculating protein embeddings using esm model
+
+#run in combicr_ml venv which contains dependencies for esm model
+python esm/scripts/extract.py esm2_t33_650M_UR50D combicr_aa_sequence.fasta combicr_aa_embeddings/esm_embeddings_raw --include mean per_tok
+
+# combicr_aa_sequence.fasta is created by accessory_scripts/create_protein_to_sequence_dict.py
+
+# for unirep embeddings, add the following code to the unirep tutorial notebook
+# (below where babbler is defined)
+
+import pickle
+protein_name_to_aa_sequence_path = 'combicr_protien_to_aa_sequence_dict.pkl'
+with open(protein_name_to_aa_sequence_path, 'rb') as handle:
+    protein_name_to_aa_dict = pickle.load(handle)
+
+protein_name_to_embedding_unirep_dict_avg = dict()
+protein_name_to_embedding_unirep_final_hidden = dict()
+protein_name_to_embedding_unirep_final_cell = dict()
+for protein_name in protein_name_to_aa_dict:
+    aa_sequence_temp = protein_name_to_aa_dict[protein_name]
+    curr_embeddings = b.get_rep(aa_sequence_temp)
+    curr_average_hidden = list(curr_embeddings[0])
+    curr_final_hidden = list(curr_embeddings[1])
+    curr_final_cell = list(curr_embeddings[2])
+
+    protein_name_to_embedding_unirep_dict_avg.update({protein_name:curr_average_hidden})
+    protein_name_to_embedding_unirep_final_hidden.update({protein_name:curr_final_hidden})
+    protein_name_to_embedding_unirep_final_cell.update({protein_name:curr_final_cell})
+
+# UNIREP64
+# pickle_file_64unirep_average_hidden_path = 'combicr_unirep_embeddings_average_hidden_64_dict.pkl'
+# pickle_file_64unirep_final_hidden_path = 'combicr_unirep_embeddings_final_hidden_64_dict.pkl'
+# pickle_file_64unirep_final_cell_path = 'combicr_unirep_embeddings_final_cell_64_dict.pkl'
+
+
+# with open(pickle_file_64unirep_average_hidden_path, 'wb') as handle:
+#     pickle.dump(protein_name_to_embedding_unirep_dict_avg, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# with open(pickle_file_64unirep_final_hidden_path, 'wb') as handle:
+#     pickle.dump(protein_name_to_embedding_unirep_final_hidden, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# with open(pickle_file_64unirep_final_cell_path, 'wb') as handle:
+#     pickle.dump(protein_name_to_embedding_unirep_final_cell, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+# UNIREP1900
+pickle_file_1900unirep_average_hidden_path = 'combicr_unirep_embeddings_average_hidden_1900_dict.pkl'
+pickle_file_1900unirep_final_hidden_path = 'combicr_unirep_embeddings_final_hidden_1900_dict.pkl'
+pickle_file_1900unirep_final_cell_path = 'combicr_unirep_embeddings_final_cell_1900_dict.pkl'
+
+
+with open(pickle_file_1900unirep_average_hidden_path, 'wb') as handle:
+    pickle.dump(protein_name_to_embedding_unirep_dict_avg, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open(pickle_file_1900unirep_final_hidden_path, 'wb') as handle:
+    pickle.dump(protein_name_to_embedding_unirep_final_hidden, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+with open(pickle_file_1900unirep_final_cell_path, 'wb') as handle:
+    pickle.dump(protein_name_to_embedding_unirep_final_cell, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+
+## use this code for generating scrambled sequence embeddings
+for protein_name in protein_name_to_aa_dict:
+    aa_sequence_temp = protein_name_to_aa_dict[protein_name]
+
+    # this block of code is only needed to shuffle
+    aa_sequence_temp = list(aa_sequence_temp)
+    shuffle(aa_sequence_temp)
+    aa_sequence_temp = ''.join(aa_sequence_temp)
+    print(aa_sequence_temp)
+
+    curr_embeddings = b.get_rep(aa_sequence_temp)
+    curr_average_hidden = list(curr_embeddings[0])
+    curr_final_hidden = list(curr_embeddings[1])
+    curr_final_cell = list(curr_embeddings[2])
+
+    protein_name_to_embedding_unirep_dict_avg.update({protein_name:curr_average_hidden})
+    protein_name_to_embedding_unirep_final_hidden.update({protein_name:curr_final_hidden})
+    protein_name_to_embedding_unirep_final_cell.update({protein_name:curr_final_cell})
