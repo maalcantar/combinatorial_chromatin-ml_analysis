@@ -13,7 +13,7 @@ This repository, including all code needed to reproduce analyses, can be install
 git clone https://github.com/maalcantar/combicr_analysis
 cd combicr_analysis
 pip install -r requirements_CombiCR.txt #requirements python for scripts 0-6; do this in a virtual environment called "CombiCR"
-pip install -r requirements_combicr_ml.txt #requirements python for scripts 7-9; do this in a virtual environment called "combicr_ml"
+pip install -r requirements_combicr_ml.txt #requirements python for scripts 7-10; do this in a virtual environment called "combicr_ml"
 ~~~
 
 R library requirements:
