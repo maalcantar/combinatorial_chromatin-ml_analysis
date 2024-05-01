@@ -1,4 +1,4 @@
-# A high-throughput approach for studying combinatorial chromatin-based transcriptional regulation
+# A high-throughput synthetic biology approach for studying combinatorial chromatin-based transcriptional regulation
 ## Introduction 
 
 This repository contains all code needed to reproduce DNA sequencing data processing and analyses described in:
