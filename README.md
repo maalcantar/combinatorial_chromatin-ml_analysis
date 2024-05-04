@@ -2,7 +2,7 @@
 ## Introduction 
 
 This repository contains all code needed to reproduce DNA sequencing data processing and analyses described in:
-> Miguel A. Alcantar, Max A. English*, Jacqueline A. Valeri*, and James J. Collins. A high-throughput approach for studying combinatorial chromatin-based transcriptional regulation. <i>In revision</i>.
+> Miguel A. Alcantar, Max A. English*, Jacqueline A. Valeri*, and James J. Collins. A high-throughput synthetic biology approach for studying combinatorial chromatin-based transcriptional regulation. <i>In revision</i>.
 
 Code author: Miguel A. Alcantar.
 # Installation & requirements 
